@@ -1,0 +1,87 @@
+<div class="container">
+    
+    <div class="col-md-12">
+        <div class="row">
+            <div id="title-box">
+                <h2 id="title-text">bAdvice</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h2>Single Question!</h2>
+                <ul class="list-group">
+                        <li class="list-group-item burger-list-item">
+                            <h3>{{title}}</h3>
+                            <p>{{text}}</p>
+                        </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    $("#add-burger-form").on("submit", function (event) {
+        // Make sure to preventDefault on a submit event.
+        event.preventDefault();
+
+        var newBurger = {
+            name: $("#burger-name").val().trim()
+        };
+
+        // Send the POST request.
+        $.ajax("/api/burgers", {
+            type: "POST",
+            data: newBurger
+        }).then(
+            function () {
+                console.log("created new burger");
+                // Reload the page to get the updated list
+                location.reload();
+            }
+        );
+    });
+
+    $(".change-devour").on("click", function (event) {
+        var id = $(this).data("id");
+
+        var newDevouredState = {
+            devoured: true
+        };
+
+        // Send the PUT request.
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: newDevouredState
+        }).then(
+            function () {
+                console.log("changed devoured to", newDevouredState);
+                // Reload the page to get the updated list
+                location.reload();
+            }
+        );
+    });
+
+    $("#reset-all").on("click", function (event) {
+        var id = $(this).data("id");
+
+        var newDevouredState = {
+            devoured: true
+        };
+
+        // Send the PUT request.
+        $.ajax("/api/burgers/reset", {
+            type: "GET"
+        }).then(
+            function () {
+                console.log("Reset devoured state to false on all burgers");
+                // Reload the page to get the updated list
+                location.reload();
+            }
+        );
+    });
+</script>
