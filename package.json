@@ -1,5 +1,5 @@
 {
-  "name": "burger",
+  "name": "badvice",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BenjaminFrench/sequelizedBurger.git"
+    "url": "git+https://github.com/BenjaminFrench/bAdvice.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BenjaminFrench/sequelizedBurger/issues"
+    "url": "https://github.com/BenjaminFrench/bAdvice/issues"
   },
-  "homepage": "https://github.com/BenjaminFrench/sequelizedBurger#readme",
+  "homepage": "https://github.com/BenjaminFrench/bAdvice#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",

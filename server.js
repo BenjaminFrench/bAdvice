@@ -34,9 +34,9 @@ require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 require("./routes/auth-routes.js")(app, passport);
 
-require('./config/passport/passport.js')(passport, db.user);
+require('./config/passport/passport.js')(passport, db.User);
 
-db.sequelize.sync().then(function() {
+db.sequelize.sync({force: false}).then(function() {
   app.listen(PORT, function() {
     console.log("App now listening at localhost:" + PORT);
   });

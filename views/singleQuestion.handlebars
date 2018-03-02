@@ -18,19 +18,50 @@
     <div class="row">
         <div class="col-md-12">
             <div>
-                <h2>Questions!</h2>
+                <h2>Single Question!</h2>
                 <ul class="list-group">
-                {{#each questions}}
                         <li class="list-group-item">
-                            <h3><a href="questions/{{id}}">{{title}}</a></h3>
-                            <p>{{text}}</p>
+                            <h3>{{question.title}}</h3>
+                            <p>{{question.text}}</p>
                         </li>
-                {{/each}}
                 </ul>
+                <button class="btn" id="new-answer">New Answer</button>
+                {{#each answers}}
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <p>{{text}}</p>
+                    </li>
+                </ul>
+                {{/each}}
             </div>
         </div>
     </div>
     
+</div>
+
+<div id="new-answer-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Answer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/api/questions/{{question.id}}/answer" method="post">
+                <div class="modal-body">
+                    <div>
+                        <label for="text">text?</label>
+                        <input name="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div id="new-question-modal" class="modal" tabindex="-1" role="dialog">
@@ -63,6 +94,11 @@
 </div>
 
 <script>
+    $("#new-answer").on("click", function (event) {
+        event.preventDefault();
+        $('#new-answer-modal').modal('show');
+    });
+
     $("#new-question").on("click", function (event) {
         event.preventDefault();
         $('#new-question-modal').modal('show');
