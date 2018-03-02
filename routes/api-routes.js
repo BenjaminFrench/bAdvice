@@ -1,39 +1,31 @@
 var db = require("../models");
 
 module.exports = function (app) {
-    app.post("/api/burgers", function (req, res) {
-        db.Burger.create({
-            burger_name: req.body.name,
-            devoured: false
-        }).then(dbBurger => {
-            res.json(dbBurger);
+    app.post("/api/questions", function (req, res) {
+        db.Question.create({
+            title: req.body.title,
+            text: req.body.text,
+            UserId: req.body.UserId
+        }).then(dbQuestion => {
+            res.json(dbQuestion);
         });
     });
 
-    app.put("/api/burgers/:id", function (req, res) {
-        var condition = "id=" + req.params.id;
+    app.get("/api/questions", function (req, res) {
+        db.Question.findAll().then((dqQuestion) => {
+            console.log(dqQuestion);
+            res.json(dqQuestion);
+        });
+    });
 
-        console.log("condition", condition);
-
-        db.Burger.update({
-            devoured: true
-        },
-        {
+    app.get("/api/questions/:id", function (req, res) {
+        db.Question.findOne({
             where: {
                 id: req.params.id
             }
-        }).then((dbBurger) => {
-            res.json(dbBurger);
-        });
-    });
-
-    app.get("/api/burgers/reset", function (req, res) {
-        db.Burger.findAll().then((results) => {
-            console.log(results);
-            results.forEach(element => {
-                element.update({ devoured: false });
-            });
-            res.json("Success");
+        }).then((dbQuestion) => {
+            console.log(dbQuestion);
+            res.json(dbQuestion);
         });
     });
 }

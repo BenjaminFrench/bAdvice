@@ -34,7 +34,7 @@ require("./routes/api-routes.js")(app);
 require("./routes/html-routes.js")(app);
 require("./routes/auth-routes.js")(app, passport);
 
-require('./config/passport/passport.js')(passport, db.user);
+require('./config/passport/passport.js')(passport, db.User);
 
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
