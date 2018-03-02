@@ -1,11 +1,18 @@
 <div class="container">
     
     <div class="col-md-12">
-        <div class="row">
-            <div id="title-box">
-                <h2 id="title-text">bAdvice</h2>
+        <h2 class="float-left" id="title-text"><a href="/">bAdvice</a></h2>
+        {{#if user}}
+            <div class="float-right">
+                <h3>{{user.username}} is logged in. <a href="/logout">Logout</a></h3>
             </div>
-        </div>
+        {{else}}
+            <div class="float-right">
+                <h3><a href="/signin">Sign in</a> | <a href="/signup">Register</a></h3>
+            </div>
+        {{/if}}
+        <div class="clearfix"></div>
+        <button class="btn" id="new-question">New Question</button>
     </div>
 
     <div class="row">
@@ -14,74 +21,86 @@
                 <h2>Single Question!</h2>
                 <ul class="list-group">
                         <li class="list-group-item burger-list-item">
-                            <h3>{{title}}</h3>
-                            <p>{{text}}</p>
+                            <h3>{{question.title}}</h3>
+                            <p>{{question.text}}</p>
                         </li>
                 </ul>
+                <button class="btn" id="new-answer">New Answer</button>
+                {{#each answers}}
+                <ul class="list-group">
+                    <li class="list-group-item burger-list-item">
+                        <p>{{text}}</p>
+                    </li>
+                </ul>
+                {{/each}}
             </div>
         </div>
     </div>
     
 </div>
 
+<div id="new-answer-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Answer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/api/questions/{{question.id}}/answer" method="post">
+                <div class="modal-body">
+                    <div>
+                        <label for="text">text?</label>
+                        <input name="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="new-question-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Question</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/api/questions" method="post">
+                <div class="modal-body">
+                    <div>
+                        <label for="title">title?</label>
+                        <input name="title" id="title">
+                    </div>
+                    <div>
+                        <label for="text">text?</label>
+                        <input name="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
-    $("#add-burger-form").on("submit", function (event) {
-        // Make sure to preventDefault on a submit event.
+    $("#new-answer").on("click", function (event) {
         event.preventDefault();
-
-        var newBurger = {
-            name: $("#burger-name").val().trim()
-        };
-
-        // Send the POST request.
-        $.ajax("/api/burgers", {
-            type: "POST",
-            data: newBurger
-        }).then(
-            function () {
-                console.log("created new burger");
-                // Reload the page to get the updated list
-                location.reload();
-            }
-        );
+        $('#new-answer-modal').modal('show');
     });
 
-    $(".change-devour").on("click", function (event) {
-        var id = $(this).data("id");
-
-        var newDevouredState = {
-            devoured: true
-        };
-
-        // Send the PUT request.
-        $.ajax("/api/burgers/" + id, {
-            type: "PUT",
-            data: newDevouredState
-        }).then(
-            function () {
-                console.log("changed devoured to", newDevouredState);
-                // Reload the page to get the updated list
-                location.reload();
-            }
-        );
-    });
-
-    $("#reset-all").on("click", function (event) {
-        var id = $(this).data("id");
-
-        var newDevouredState = {
-            devoured: true
-        };
-
-        // Send the PUT request.
-        $.ajax("/api/burgers/reset", {
-            type: "GET"
-        }).then(
-            function () {
-                console.log("Reset devoured state to false on all burgers");
-                // Reload the page to get the updated list
-                location.reload();
-            }
-        );
+    $("#new-question").on("click", function (event) {
+        event.preventDefault();
+        $('#new-question-modal').modal('show');
     });
 </script>

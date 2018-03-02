@@ -4,7 +4,8 @@ module.exports = function (app) {
     app.get("/", function (req, res) {
         db.Question.findAll({}).then(result => {
             var hbsObject = {
-                questions: result
+                questions: result,
+                user: req.user
             };
             res.render("index", hbsObject);
         });
@@ -14,12 +15,16 @@ module.exports = function (app) {
         db.Question.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            include: [db.Answer]
         }).then(result => {
             var hbsObject = {
-                title: result.title,
-                text: result.text,
-                id: result.id
+                question: {
+                    title: result.title,
+                    text: result.text,
+                    id: result.id
+                },
+                answers: result.Answers,
             };
             res.render("singleQuestion", hbsObject);
         });

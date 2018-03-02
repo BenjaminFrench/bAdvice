@@ -6,13 +6,9 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
 
-        title: {
-            type: DataTypes.TEXT,
-            notEmpty: true
-        },
-
         text: {
             type: DataTypes.STRING,
+            notEmpty: true
         }
     });
 
