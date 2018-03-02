@@ -1,0 +1,123 @@
+<div class="container">
+    
+    <div class="col-md-12">
+        <div class="row">
+            <div id="title-box">
+                <img id="burger-title-img" src="../assets/img/burger.png" class="img-fluid" alt="Responsive image" height="100px">
+                <h2 id="title-text">Eat Da Burger</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div id="add-burger">
+                <form id="add-burger-form" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2 mr-sm-2" id="burger-name" placeholder="Add a burger!">
+                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <div>
+                <h2>Burgers!</h2>
+                <ul class="list-group">
+                {{#each burgers}}
+                    {{#unless devoured}}
+                        <li class="list-group-item burger-list-item">
+                            {{burger_name}}<button data-id="{{id}}" class="change-devour btn btn-danger btn-sm">Devour</button>
+                        </li>
+                    {{/unless}}
+                {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <h2>Devoured Burgers</h2>
+                <ul class="list-group">
+                {{#each burgers}}
+                    {{#if devoured}}
+                        <li class="list-group-item burger-list-item">
+                            {{burger_name}}
+                        </li>
+                    {{/if}}
+                {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        
+
+    </div>
+
+    
+
+    
+</div>
+<button id="reset-all" class="btn btn-danger">Reset all burgers</button>
+
+<script>
+    $("#add-burger-form").on("submit", function (event) {
+        // Make sure to preventDefault on a submit event.
+        event.preventDefault();
+
+        var newBurger = {
+            name: $("#burger-name").val().trim()
+        };
+
+        // Send the POST request.
+        $.ajax("/api/burgers", {
+            type: "POST",
+            data: newBurger
+        }).then(
+            function () {
+                console.log("created new burger");
+                // Reload the page to get the updated list
+                location.reload();
+            }
+        );
+    });
+
+    $(".change-devour").on("click", function (event) {
+        var id = $(this).data("id");
+
+        var newDevouredState = {
+            devoured: true
+        };
+
+        // Send the PUT request.
+        $.ajax("/api/burgers/" + id, {
+            type: "PUT",
+            data: newDevouredState
+        }).then(
+            function () {
+                console.log("changed devoured to", newDevouredState);
+                // Reload the page to get the updated list
+                location.reload();
+            }
+        );
+    });
+
+    $("#reset-all").on("click", function (event) {
+        var id = $(this).data("id");
+
+        var newDevouredState = {
+            devoured: true
+        };
+
+        // Send the PUT request.
+        $.ajax("/api/burgers/reset", {
+            type: "GET"
+        }).then(
+            function () {
+                console.log("Reset devoured state to false on all burgers");
+                // Reload the page to get the updated list
+                location.reload();
+            }
+        );
+    });
+</script>
