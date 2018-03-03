@@ -9,6 +9,12 @@ module.exports = function (sequelize, DataTypes) {
         text: {
             type: DataTypes.STRING,
             notEmpty: true
+        },
+
+        upvotes: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+            notEmpty: true
         }
     });
 
