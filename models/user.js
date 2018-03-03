@@ -30,6 +30,12 @@ module.exports = function (sequelize, DataTypes) {
         status: {
             type: DataTypes.ENUM('active', 'inactive'),
             defaultValue: 'active'
+        },
+
+        upvotes: {
+            type: DataTypes.Integer,
+            defaultValue: 0,
+            notEmpty: true
         }
     });
 
