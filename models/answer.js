@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
         },
 
         upvotes: {
-            type: DataTypes.Integer,
+            type: DataTypes.INTEGER,
             defaultValue: 0,
             notEmpty: true
         }

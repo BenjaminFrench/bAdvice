@@ -25,6 +25,7 @@ module.exports = function (app) {
                     id: result.id
                 },
                 answers: result.Answers,
+                user: req.user
             };
             res.render("singleQuestion", hbsObject);
         });
