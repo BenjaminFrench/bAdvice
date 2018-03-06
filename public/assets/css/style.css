@@ -3,7 +3,7 @@ html, body {
     height: 100%;
 }
 
-.navbar {
+.navbar, .modal-header {
     background-color: firebrick;
     border-bottom: 2px solid grey;
 }
