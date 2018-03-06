@@ -16,7 +16,8 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             },
-            include: [db.Answer]
+            include: [db.Answer],
+            order: [[db.Answer, 'upvotes', 'desc']]
         }).then(result => {
             var hbsObject = {
                 question: {
