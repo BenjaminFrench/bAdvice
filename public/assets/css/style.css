@@ -2,3 +2,20 @@ html, body {
     margin: 0;
     height: 100%;
 }
+
+.navbar {
+    background-color: firebrick;
+    border-bottom: 2px solid grey;
+}
+
+a {
+    color: black;
+}
+
+.flex-column {
+    position: fixed;
+}
+
+li {
+    margin: 5px;
+}
