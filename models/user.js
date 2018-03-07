@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             validate: {
                 isEmail: true
-            } 
+            }
         },
 
         password: {
@@ -30,6 +30,12 @@ module.exports = function (sequelize, DataTypes) {
         status: {
             type: DataTypes.ENUM('active', 'inactive'),
             defaultValue: 'active'
+        },
+
+        upvotes: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+            notEmpty: true
         }
     });
 
@@ -40,6 +46,10 @@ module.exports = function (sequelize, DataTypes) {
         User.hasMany(models.Answer, {
             onDelete: "cascade"
         });
+        User.hasMany(models.Upvote, {
+            onDelete: "cascade"
+        });
+        
     };
 
     return User;

@@ -16,8 +16,11 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             },
-            include: [db.Answer]
+            include: [db.Answer],
+            order: [[db.Answer, 'upvotes', 'desc']]
         }).then(result => {
+
+            console.log(result.Answers[0]);
             var hbsObject = {
                 question: {
                     title: result.title,
@@ -25,6 +28,7 @@ module.exports = function (app) {
                     id: result.id
                 },
                 answers: result.Answers,
+                user: req.user
             };
             res.render("singleQuestion", hbsObject);
         });
