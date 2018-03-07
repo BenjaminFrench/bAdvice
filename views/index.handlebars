@@ -1,36 +1,57 @@
-<div class="container">
-    
-    <div class="col-md-12">
-        <h2 class="float-left" id="title-text"><a href="/">bAdvice</a></h2>
+{{!-- navbar --}}
+<nav class="navbar sticky-top">
+    <div class="container">
+        <h2 class="float-left" id="title-text">
+            <a href="/">bAdvice</a>
+        </h2>
+        <button class="btn" id="new-question">New Question</button>
         {{#if user}}
-            <div class="float-right">
-                <h3>{{user.username}} is logged in. <a href="/logout">Logout</a></h3>
-            </div>
+        <div class="float-right">
+            <h3>{{user.username}} is logged in.
+                <a href="/logout">Logout</a>
+            </h3>
+        </div>
         {{else}}
-            <div class="float-right">
-                <h3><a href="/signin">Sign in</a> | <a href="/signup">Register</a></h3>
-            </div>
+        <div class="float-right">
+            <h3>
+                <a href="/signin">Sign in</a> |
+                <a href="/signup">Register</a>
+            </h3>
+        </div>
         {{/if}}
-        <div class="clearfix"></div>
-        <button class="btn btn-primary" id="new-question">New Question</button>
     </div>
+</nav>
 
+<div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2">
+            <nav class="nav flex-column sticky">
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="#">Top Questions</a>
+                <a class="nav-link" href="#">New Questions</a>
+                <a class="nav-link" href="#">Top Answers</a>
+                <a class="nav-link" href="#">Unanswered Questions</a>
+                <a class="nav-link" href="#">Category</a>
+                <a class="nav-link" href="#">Category</a>
+            </nav>
+        </div>
+
+
+        <div class="col-md-10">
             <div>
-                <h2>Questions!</h2>
                 <ul class="list-group">
-                {{#each questions}}
-                        <li class="list-group-item">
-                            <h3><a href="questions/{{id}}">{{title}}</a></h3>
-                            <p>{{text}}</p>
-                        </li>
-                {{/each}}
+                    {{#each questions}}
+                    <li class="list-group-item">
+                        <h3>
+                            <a href="questions/{{id}}">{{title}}</a>
+                        </h3>
+                        <p>{{text}}</p>
+                    </li>
+                    {{/each}}
                 </ul>
             </div>
         </div>
     </div>
-    
 </div>
 
 <div id="new-question-modal" class="modal" tabindex="-1" role="dialog">
@@ -45,12 +66,12 @@
             <form action="/api/questions" method="post">
                 <div class="modal-body">
                     <div>
-                        <label for="title">title?</label>
+                        <label for="title">Title</label>
                         <input name="title" id="title">
                     </div>
                     <div>
-                        <label for="text">text?</label>
-                        <input name="text">
+                        <label for="text">Question</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
