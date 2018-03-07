@@ -45,8 +45,18 @@ module.exports = function (app) {
                   UserId: req.user.id,
                   AnswerId: req.params.answer
               }).then(upvoteRes => {
+                  db.Answer.update({
+                        upvotes: db.Sequelize.literal('upvotes + 1')
+                    },
+                    {
+                        where: { id: req.params.answer }
+                    }
+                    ).then(dbAnswer => {
+                        // redirect to the new question page
+                        res.json('success');
+                        // res.json(dbAnswer);
+                    });
 
-                  res.json("SUCCESS!!!!!! UPVOTED");
                   // res.json(dbAnswer);
               });
             }else{
