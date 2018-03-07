@@ -26,6 +26,20 @@ module.exports = function (app) {
         });
     });
 
+    app.put("/api/questions/:id/:answer/upvote", isLoggedIn, function (req, res) {
+        db.Answer.update({
+            upvotes: db.Sequelize.literal('upvotes + 1')
+        },
+        {
+            where: { id: req.params.answer }
+        }
+        ).then(dbAnswer => {
+            // redirect to the new question page
+            res.json('success');
+            // res.json(dbAnswer);
+        });
+    });
+
     app.get("/api/questions", function (req, res) {
         db.Question.findAll().then((dqQuestion) => {
             console.log(dqQuestion);

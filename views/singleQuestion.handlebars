@@ -17,7 +17,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div>
+            <div id="single-question" data-id="{{question.id}}">
                 <h2>Single Question!</h2>
                 <ul class="list-group">
                         <li class="list-group-item">
@@ -26,13 +26,13 @@
                         </li>
                 </ul>
                 <button class="btn btn-primary" id="new-answer">New Answer</button>
-                {{#each answers}}
                 <ul class="list-group">
+                {{#each answers}}
                     <li class="list-group-item">
-                        <p>{{text}}</p>
+                        <button class="upvote float-left" data-id='{{id}}'>upvote</button><p>{{upvotes}} {{text}}</p>
                     </li>
-                </ul>
                 {{/each}}
+                </ul>
             </div>
         </div>
     </div>
@@ -102,5 +102,17 @@
     $("#new-question").on("click", function (event) {
         event.preventDefault();
         $('#new-question-modal').modal('show');
+    });
+
+    $('.upvote').on("click", function (event) {
+        event.preventDefault();
+        var questionId = $('#single-question').attr('data-id');
+        var answerId = $(this).attr('data-id');
+        fetch(`/api/questions/${questionId}/${answerId}/upvote`,{
+            method: 'PUT',
+            credentials: 'include'
+        }).then(function( response ){
+            location.reload();
+        });
     });
 </script>
