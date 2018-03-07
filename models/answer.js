@@ -29,6 +29,9 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             }
         });
+        Answer.hasMany(models.Upvote, {
+            onDelete: "cascade"
+        });
     };
 
     return Answer;

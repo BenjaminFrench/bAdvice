@@ -35,12 +35,12 @@ module.exports = function (app) {
       }).then((dqUpvote) => {
             console.log(dqUpvote);
             var shouldUpvote = true;
-            dqUpvote.forEach( element => {
-                if(element.UserId === req.user.id){
+            dqUpvote.forEach(element => {
+                if (element.UserId === req.user.id) {
                   shouldUpvote = false;
                 }
             });
-            if(shouldUpvote){
+            if (shouldUpvote) {
               db.Upvote.create({
                   UserId: req.user.id,
                   AnswerId: req.params.answer
@@ -59,7 +59,7 @@ module.exports = function (app) {
 
                   // res.json(dbAnswer);
               });
-            }else{
+            } else {
                   res.json("FAILED.. UPVOTE");
             }
             // res.json(dqUpvote);
