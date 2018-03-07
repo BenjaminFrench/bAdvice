@@ -1,5 +1,5 @@
 <div class="container">
-    
+
     <div class="col-md-12">
         <h2 class="float-left" id="title-text"><a href="/">bAdvice</a></h2>
         {{#if user}}
@@ -29,14 +29,14 @@
                 <ul class="list-group">
                 {{#each answers}}
                     <li class="list-group-item">
-                        <button class="upvote float-left" data-id='{{id}}'>upvote</button><p>{{upvotes}} {{text}}</p>
+                        <button class="upvote float-left" data-id='{{id}}'>upvote</button><p>{{upvoteCount}} {{text}}</p>
                     </li>
                 {{/each}}
                 </ul>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div id="new-answer-modal" class="modal" tabindex="-1" role="dialog">

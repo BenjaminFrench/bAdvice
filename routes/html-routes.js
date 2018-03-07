@@ -19,6 +19,14 @@ module.exports = function (app) {
             include: [db.Answer],
             order: [[db.Answer, 'upvotes', 'desc']]
         }).then(result => {
+            result.Answers.forEach( (element, index, array) =>{
+                db.Upvote.count({
+                    where: {AnswerId: element.id}
+                }).then( count => {
+                  array[index].upvoteCount = count;
+                });
+            });
+            console.log(result.Answers[0]);
             var hbsObject = {
                 question: {
                     title: result.title,
