@@ -19,6 +19,8 @@ module.exports = function (app) {
             include: [db.Answer],
             order: [[db.Answer, 'upvotes', 'desc']]
         }).then(result => {
+
+            console.log(result.Answers[0]);
             var hbsObject = {
                 question: {
                     title: result.title,

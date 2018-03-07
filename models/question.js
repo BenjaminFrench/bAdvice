@@ -20,12 +20,13 @@ module.exports = function (sequelize, DataTypes) {
         Question.hasMany(models.Answer, {
             onDelete: "cascade"
         });
+        
         Question.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false
             }
         });
     };
-    
+
     return Question;
 };

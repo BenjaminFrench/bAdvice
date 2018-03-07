@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             validate: {
                 isEmail: true
-            } 
+            }
         },
 
         password: {
@@ -46,6 +46,10 @@ module.exports = function (sequelize, DataTypes) {
         User.hasMany(models.Answer, {
             onDelete: "cascade"
         });
+        User.hasMany(models.Upvote, {
+            onDelete: "cascade"
+        });
+        
     };
 
     return User;
