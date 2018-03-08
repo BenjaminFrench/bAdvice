@@ -46,6 +46,7 @@
                             <a href="questions/{{id}}">{{title}}</a>
                         </h3>
                         <p>{{text}}</p>
+                        <p>Posted by: {{User.username}}</p>
                     </li>
                     {{/each}}
                 </ul>
@@ -71,7 +72,7 @@
                     </div>
                     <div>
                         <label for="text">Question</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                        <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

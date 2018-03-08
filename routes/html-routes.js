@@ -31,7 +31,8 @@ module.exports = function (app) {
                 question: {
                     title: result.title,
                     text: result.text,
-                    id: result.id
+                    id: result.id,
+                    username: result.User.username
                 },
                 answers: result.Answers,
                 user: req.user
