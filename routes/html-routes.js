@@ -4,12 +4,13 @@ module.exports = function (app) {
     app.get("/", function (req, res) {
         db.Question.findAll({
             include: [
-                {model: db.User, attributes: ["username", "id"]}
+                {model: db.User, attributes: ["username", "id"]},
+                {model: db.Answer}
             ]
         }).then(result => {
             var hbsObject = {
                 questions: result,
-                user: req.user
+                user: req.user,
             };
             res.render("index", hbsObject);
         });
