@@ -3,6 +3,7 @@
     <div class="container">
         <h2 class="float-left" id="title-text">
             <a href="/">bAdvice</a>
+            <i class="fab fa-accessible-icon"></i>
         </h2>
         <button class="btn" id="new-question">New Question</button>
         {{#if user}}
@@ -29,7 +30,7 @@
                 <a class="nav-link" href="#">Top Questions</a>
                 <a class="nav-link" href="#">New Questions</a>
                 <a class="nav-link" href="#">Top Answers</a>
-                <a class="nav-link" href="#">Unanswered Questions</a>
+                <a class="nav-link" href="#">Unanswered</a>
                 <a class="nav-link" href="#">Category</a>
                 <a class="nav-link" href="#">Category</a>
             </nav>
@@ -43,11 +44,13 @@
                         <button class="btn" id="new-answer">New Answer</button>
                     </li>
                 </ul>
-                <button class="btn btn-primary" id="new-answer">New Answer</button>
                 <ul class="list-group">
                 {{#each answers}}
                     <li class="list-group-item">
-                        <button class="upvote float-left" data-id='{{id}}'>upvote</button><p>{{upvotes}} {{text}}</p>
+                        <p>{{text}}</p>
+                        <hr>
+                        <i class="fas fa-arrow-up upvote float-left" data-id='{{id}}'></i><p class="float-left no-margin">upvote  {{upvotes}}</p>
+                        {{!-- <button class="upvote float-right" data-id='{{id}}'>upvote</button><p>{{upvotes}}</p> --}}
                     </li>
                 {{/each}}
                 </ul>
@@ -93,12 +96,11 @@
             <form action="/api/questions" method="post">
                 <div class="modal-body">
                     <div>
-                        <label for="title">title?</label>
-                        <input name="title" id="title">
+                        <textarea name="title" class="form-control" id="title" placeholder="Enter a title for your question" type="text" rows="1"></textarea>
                     </div>
+                    <br>
                     <div>
-                        <label for="text">text?</label>
-                        <input name="text">
+                        <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Enter question here..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
