@@ -2,10 +2,15 @@ var db = require("../models");
 
 module.exports = function (app) {
     app.get("/", function (req, res) {
-        db.Question.findAll({}).then(result => {
+        db.Question.findAll({
+            include: [
+                {model: db.User, attributes: ["username", "id"]},
+                {model: db.Answer}
+            ]
+        }).then(result => {
             var hbsObject = {
                 questions: result,
-                user: req.user
+                user: req.user,
             };
             res.render("index", hbsObject);
         });
@@ -16,16 +21,19 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             },
-            include: [db.Answer],
+            include: [
+                {model: db.User, attributes: ["username", "id"]},
+                db.Answer
+            ],
             order: [[db.Answer, 'upvotes', 'desc']]
         }).then(result => {
 
-            console.log(result.Answers[0]);
             var hbsObject = {
                 question: {
                     title: result.title,
                     text: result.text,
-                    id: result.id
+                    id: result.id,
+                    username: result.User.username
                 },
                 answers: result.Answers,
                 user: req.user

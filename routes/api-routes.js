@@ -28,24 +28,25 @@ module.exports = function (app) {
 
     app.put("/api/questions/:id/:answer/upvote", isLoggedIn, function (req, res) {
 
-      db.Upvote.findAll({
-        where: {
-            AnswerId: req.params.answer
-        }
-      }).then((dqUpvote) => {
+        db.Upvote.findAll({
+            where: {
+                AnswerId: req.params.answer
+            }
+        }).then((dqUpvote) => {
             console.log(dqUpvote);
             var shouldUpvote = true;
-            dqUpvote.forEach( element => {
-                if(element.UserId === req.user.id){
-                  shouldUpvote = false;
+            dqUpvote.forEach(element => {
+                if (element.UserId === req.user.id) {
+                    shouldUpvote = false;
                 }
             });
-            if(shouldUpvote){
-              db.Upvote.create({
-                  UserId: req.user.id,
-                  AnswerId: req.params.answer
-              }).then(upvoteRes => {
-                  db.Answer.update({
+           
+            if (shouldUpvote) {
+                db.Upvote.create({
+                    UserId: req.user.id,
+                    AnswerId: req.params.answer
+                }).then(upvoteRes => {
+                    db.Answer.update({
                         upvotes: db.Sequelize.literal('upvotes + 1')
                     },
                     {
@@ -57,15 +58,15 @@ module.exports = function (app) {
                         // res.json(dbAnswer);
                     });
 
-                  // res.json(dbAnswer);
-              });
-            }else{
-                  res.json("FAILED.. UPVOTE");
+                    // res.json(dbAnswer);
+                });
+            }
+            
+            else {
+                res.json("FAILED.. UPVOTE");
             }
             // res.json(dqUpvote);
-          });
-
-
+        });
     });
 
     app.get("/api/questions", function (req, res) {

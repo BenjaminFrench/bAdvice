@@ -41,6 +41,7 @@
                     <li class="list-group-item">
                         <h3>{{question.title}}</h3>
                         <p>{{question.text}}</p>
+                        <p>Posted by: {{question.username}}</p>
                         <button class="btn" id="new-answer">New Answer</button>
                     </li>
                 </ul>
@@ -49,7 +50,7 @@
                     <li class="list-group-item">
                         <p>{{text}}</p>
                         <hr>
-                        <i class="fas fa-arrow-up upvote float-left" data-id='{{id}}'></i><p class="float-left no-margin">upvote  {{upvotes}}</p>
+                        <button class="upvote btn btn-danger float-left" data-id='{{id}}'><i class="fas fa-arrow-up upvote"></i></button><p class="float-right">Upvotes: {{upvotes}}</p>
                         {{!-- <button class="upvote float-right" data-id='{{id}}'>upvote</button><p>{{upvotes}}</p> --}}
                     </li>
                 {{/each}}
