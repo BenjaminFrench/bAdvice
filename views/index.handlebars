@@ -3,6 +3,7 @@
     <div class="container">
         <h2 class="float-left" id="title-text">
             <a href="/">bAdvice</a>
+            <i class="fab fa-accessible-icon"></i>
         </h2>
         <button class="btn" id="new-question">New Question</button>
         {{#if user}}
@@ -30,7 +31,7 @@
                 <a class="nav-link" href="#">Top Questions</a>
                 <a class="nav-link" href="#">New Questions</a>
                 <a class="nav-link" href="#">Top Answers</a>
-                <a class="nav-link" href="#">Unanswered Questions</a>
+                <a class="nav-link" href="#">Unanswered</a>
                 <a class="nav-link" href="#">Category</a>
                 <a class="nav-link" href="#">Category</a>
             </nav>
@@ -46,7 +47,9 @@
                             <a href="questions/{{id}}">{{title}}</a>
                         </h3>
                         <p>{{text}}</p>
+                        <hr>
                         <p>Posted by: {{User.username}}</p>
+                        <p class="no-margin">(3 answers)</p>
                     </li>
                     {{/each}}
                 </ul>
@@ -67,12 +70,11 @@
             <form action="/api/questions" method="post">
                 <div class="modal-body">
                     <div>
-                        <label for="title">Title</label>
-                        <input name="title" id="title">
+                        <textarea name="title" class="form-control" id="title" placeholder="Enter a title for your question" type="text" rows="1"></textarea>
                     </div>
+                    <br>
                     <div>
-                        <label for="text">Question</label>
-                        <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                        <textarea name="text" class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Enter question here..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

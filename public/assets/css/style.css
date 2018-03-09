@@ -19,3 +19,7 @@ a {
 li {
     margin: 5px;
 }
+
+.no-margin {
+    margin-bottom: 0;
+}
