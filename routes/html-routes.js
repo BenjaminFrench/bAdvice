@@ -23,7 +23,7 @@ module.exports = function (app) {
             },
             include: [
                 {model: db.User, attributes: ["username", "id"]},
-                db.Answer
+                {model: db.Answer, include: [{model: db.User}]}
             ],
             order: [[db.Answer, 'upvotes', 'desc']]
         }).then(result => {

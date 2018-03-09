@@ -40,7 +40,7 @@ module.exports = function (app) {
                     shouldUpvote = false;
                 }
             });
-           
+
             if (shouldUpvote) {
                 db.Upvote.create({
                     UserId: req.user.id,
@@ -61,7 +61,7 @@ module.exports = function (app) {
                     // res.json(dbAnswer);
                 });
             }
-            
+
             else {
                 res.json("FAILED.. UPVOTE");
             }

@@ -49,6 +49,8 @@
                 {{#each answers}}
                     <li class="list-group-item">
                         <p>{{text}}</p>
+                        </br>
+                        <p>By:{{User.username}}</p>
                         <hr>
                         <button class="upvote btn btn-danger float-left" data-id='{{id}}'><i class="fas fa-arrow-up upvote"></i></button><p class="float-right">Upvotes: {{upvotes}}</p>
                         {{!-- <button class="upvote float-right" data-id='{{id}}'>upvote</button><p>{{upvotes}}</p> --}}
