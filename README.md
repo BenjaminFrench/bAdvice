@@ -1,2 +1,2 @@
 # bAdvice
-bad advice
+Q & A website built with Node, Express, MySQL, and Passport
